@@ -14,13 +14,18 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        try {
-            System.out.println("Consumed: " + blockingQueue.take());
-            System.out.println("Consumed: " + blockingQueue.take());
-            System.out.println("Consumed: " + blockingQueue.take());
-            System.out.println("Consumed: " + blockingQueue.take());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            try {
+                if (blockingQueue.isEmpty()) {
+                    System.out.println("I m waiting for produce");
+                } else {
+                    System.out.println("Consumed: " + blockingQueue.take());
+                    Thread.sleep(4000);
+
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

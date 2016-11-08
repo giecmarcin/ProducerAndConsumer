@@ -15,17 +15,17 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        Random random = new Random();
-        int number = 0;
-        try {
-            for(int i=0; i<4; i++){
+        while(true){
+            Random random = new Random();
+            int number = 0;
+            try {
                 number = random.nextInt(50);
                 System.out.println("Produced: " + number);
                 blockingQueue.put(number);
-                Thread.sleep(1000);
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
